@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <prerequisites>
+    <maven>3.3.9</maven>
+  </prerequisites>
+
+  <groupId>org.microbean</groupId>
+  <artifactId>microbean-pluginmanagement-pom</artifactId>
+  <version>1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <parent>
+    <groupId>org.microbean</groupId>
+    <artifactId>microbean-parent-pom</artifactId>
+    <version>1-SNAPSHOT</version>
+  </parent>
+
+  <name>MicroBean Plugin Management POM</name>
+  <description>${project.name}</description>
+  <inceptionYear>2017</inceptionYear>
+  <url>${project.scm.url}</url>
+
+  <scm>
+    <connection>scm:git:git@github.com:ljnelson/${project.artifactId}.git</connection>
+    <developerConnection>scm:git:git@github.com:ljnelson/${project.artifactId}.git</developerConnection>
+    <url>https://github.com/ljnelson/${project.artifactId}/</url>
+  </scm>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.12</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-antrun-plugin</artifactId>
+          <version>1.8</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>2.6</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.0.0</version>
+          <configuration>
+            <filesets>
+              <fileset>
+                <directory>${basedir}</directory>
+                <includes>
+                  <include>src/**/*~</include>
+                  <include>*~</include>
+                </includes>
+              </fileset>
+            </filesets>
+          </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.6.0</version>
+          <configuration>
+            <compilerArgs>
+              <arg>-Xlint:all</arg>
+              <arg>-parameters</arg>
+            </compilerArgs>
+          </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>2.10</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-ear-plugin</artifactId>
+          <version>2.10.1</version>
+          <configuration>
+            <version>6</version>
+          </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-ejb-plugin</artifactId>
+          <version>2.5.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-enforcer-plugin</artifactId>
+          <version>1.4.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-plugin-plugin</artifactId>
+          <version>3.5</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.0.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.19.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>3.0.0</version>
+        </plugin>
+        <plugin>
+          <groupId>com.github.github</groupId>
+          <artifactId>site-maven-plugin</artifactId>
+          <version>0.12</version>
+          <configuration>
+            <message>Building site for ${project.artifactId} ${project.version}</message>
+          </configuration>
+          <executions>
+            <execution>
+              <id>Deploy site to Github</id>
+              <goals>
+                <goal>site</goal>
+              </goals>
+              <phase>site-deploy</phase>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>versions-maven-plugin</artifactId>
+          <version>2.3</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+  
+  <properties>
+
+    <!-- maven-ejb-plugin properties -->
+    <ejb.ejbVersion>3.1</ejb.ejbVersion>
+
+    <!-- maven-compiler-plugin properties -->
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    
+    <!-- maven-javadoc-plugin properties -->
+    <bottom><![CDATA[Copyright &copy; ${project.inceptionYear}&ndash;{currentYear}, <a href="http://microbean.org" target="_parent">MicroBean</a>. All rights reserved.]]></bottom>
+    <detectLinks>false</detectLinks>
+    <sourcetab>2</sourcetab>
+
+    <!-- maven-site-plugin properties -->
+    <maven.site.deploy.skip>true</maven.site.deploy.skip>
+
+    <!-- maven-surefire-plugin properties -->
+    <surefire.useFile>false</surefire.useFile>
+
+    <!-- site-github-plugin properties -->
+    <github.global.server>github</github.global.server>
+
+  </properties>
+
+  <profiles>
+    <profile>
+      <id>toolchain</id>
+      <activation>
+        <file>
+          <exists>${user.home}/.m2/toolchains.xml</exists>
+        </file>
+      </activation>
+      <build>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <artifactId>maven-toolchains-plugin</artifactId>
+              <version>1.1</version>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+        <plugins>
+          <plugin>
+            <artifactId>maven-toolchains-plugin</artifactId>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>toolchain</goal>
+                </goals>
+                <configuration>
+                  <toolchains>
+                    <jdk>
+                      <version>${jdkToolchainVersion}</version>
+                    </jdk>
+                  </toolchains>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+      <properties>
+        <!-- Properties related to maven-toolchains-plugin -->
+        <jdkToolchainVersion>${maven.compiler.target}</jdkToolchainVersion>
+      </properties>
+    </profile>
+  </profiles>
+
+</project>
