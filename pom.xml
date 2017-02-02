@@ -17,7 +17,7 @@
   <parent>
     <groupId>org.microbean</groupId>
     <artifactId>microbean-parent-pom</artifactId>
-    <version>1-SNAPSHOT</version>
+    <version>1</version>
   </parent>
 
   <name>MicroBean Plugin Management POM</name>
@@ -26,9 +26,9 @@
   <url>${project.scm.url}</url>
 
   <scm>
-    <connection>scm:git:git@github.com:ljnelson/microbean-pluginmanagement.git</connection>
-    <developerConnection>scm:git:git@github.com:ljnelson/microbean-pluginmanagement.git</developerConnection>
-    <url>https://github.com/ljnelson/microbean-pluginmanagement/</url>
+    <connection>scm:git:git@github.com:ljnelson/${project.artifactId}.git</connection>
+    <developerConnection>scm:git:git@github.com:ljnelson/${project.artifactId}.git</developerConnection>
+    <url>https://github.com/ljnelson/${project.artifactId}/</url>
   </scm>
 
   <dependencyManagement>
@@ -69,7 +69,7 @@
         </plugin>
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.6.0</version>
+          <version>3.6.1</version>
           <configuration>
             <compilerArgs>
               <arg>-Xlint:all</arg>
