@@ -26,9 +26,9 @@
   <url>${project.scm.url}</url>
 
   <scm>
-    <connection>scm:git:git@github.com:ljnelson/${project.artifactId}.git</connection>
-    <developerConnection>scm:git:git@github.com:ljnelson/${project.artifactId}.git</developerConnection>
-    <url>https://github.com/ljnelson/${project.artifactId}/</url>
+    <connection>scm:git:git@github.com:ljnelson/microbean-pluginmanagement.git</connection>
+    <developerConnection>scm:git:git@github.com:ljnelson/microbean-pluginmanagement.git</developerConnection>
+    <url>https://github.com/ljnelson/microbean-pluginmanagement/</url>
   </scm>
 
   <dependencyManagement>
