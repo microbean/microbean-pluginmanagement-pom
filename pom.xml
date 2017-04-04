@@ -20,7 +20,7 @@
   <name>MicroBean Plugin Management POM</name>
   <description>${project.name}</description>
   <inceptionYear>2017</inceptionYear>
-  <url>${project.scm.url}</url>
+  <url>https://github.com/ljnelson/${project.artifactId}/</url>
 
   <scm>
     <connection>scm:git:git@github.com:ljnelson/${project.artifactId}.git</connection>
@@ -116,8 +116,15 @@
         </plugin>
         <plugin>
           <groupId>com.github.github</groupId>
-          <artifactId>site-maven-plugin</artifactId>
+          <artifactId>site-maven-plugin</artifactId>          
           <version>0.12</version>
+          <dependencies>
+            <dependency>
+              <groupId>org.eclipse.mylyn.github</groupId>
+              <artifactId>org.eclipse.egit.github.core</artifactId>
+              <version>2.1.5</version>
+            </dependency>
+          </dependencies>
           <configuration>
             <message>Building site for ${project.artifactId} ${project.version}</message>
           </configuration>
@@ -153,6 +160,9 @@
     <bottom><![CDATA[Copyright &copy; ${project.inceptionYear}&ndash;{currentYear}, <a href="http://microbean.org" target="_parent">MicroBean</a>. All rights reserved.]]></bottom>
     <detectLinks>false</detectLinks>
     <sourcetab>2</sourcetab>
+
+    <!-- maven-release-plugin properties -->
+    <goals>deploy,site-deploy</goals>
 
     <!-- maven-site-plugin properties -->
     <maven.site.deploy.skip>true</maven.site.deploy.skip>
