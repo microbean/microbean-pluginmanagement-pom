@@ -8,7 +8,7 @@
 
   <groupId>org.microbean</groupId>
   <artifactId>microbean-pluginmanagement-pom</artifactId>
-  <version>3-SNAPSHOT</version>
+  <version>3</version>
   <packaging>pom</packaging>
 
   <parent>
@@ -26,7 +26,7 @@
     <connection>scm:git:git@github.com:ljnelson/${project.artifactId}.git</connection>
     <developerConnection>scm:git:git@github.com:ljnelson/${project.artifactId}.git</developerConnection>
     <url>https://github.com/ljnelson/${project.artifactId}/</url>
-    <tag>HEAD</tag>
+    <tag>microbean-pluginmanagement-pom-3</tag>
   </scm>
 
   <dependencyManagement>
