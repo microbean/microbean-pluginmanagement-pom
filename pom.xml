@@ -10,7 +10,7 @@
   <parent>
     <groupId>org.microbean</groupId>
     <artifactId>microbean-parent-pom</artifactId>
-    <version>4</version>
+    <version>5</version>
   </parent>
 
   <name>MicroBean Plugin Management POM</name>
