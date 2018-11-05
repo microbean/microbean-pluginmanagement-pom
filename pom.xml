@@ -4,13 +4,13 @@
 
   <groupId>org.microbean</groupId>
   <artifactId>microbean-pluginmanagement-pom</artifactId>
-  <version>6-SNAPSHOT</version>
+  <version>7-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <parent>
     <groupId>org.microbean</groupId>
     <artifactId>microbean-parent-pom</artifactId>
-    <version>5</version>
+    <version>7-SNAPSHOT</version>
   </parent>
 
   <name>microBean Plugin Management POM</name>
@@ -52,23 +52,8 @@
           <version>3.1.0</version>
         </plugin>
         <plugin>
-          <artifactId>maven-clean-plugin</artifactId>
-          <version>3.0.0</version>
-          <configuration>
-            <filesets>
-              <fileset>
-                <directory>${basedir}</directory>
-                <includes>
-                  <include>src/**/*~</include>
-                  <include>*~</include>
-                </includes>
-              </fileset>
-            </filesets>
-          </configuration>
-        </plugin>
-        <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.7.0</version>
+          <version>3.8.0</version>
           <configuration>
             <compilerArgs>
               <arg>-Xlint:all</arg>
@@ -78,7 +63,7 @@
         </plugin>
         <plugin>
           <artifactId>maven-dependency-plugin</artifactId>
-          <version>3.0.2</version>
+          <version>3.1.1</version>
         </plugin>
         <plugin>
           <artifactId>maven-ear-plugin</artifactId>
@@ -97,7 +82,7 @@
         </plugin>
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
-          <version>3.0.2</version>
+          <version>3.1.0</version>
         </plugin>
         <plugin>
           <artifactId>maven-plugin-plugin</artifactId>
@@ -105,11 +90,11 @@
         </plugin>
         <plugin>
           <artifactId>maven-resources-plugin</artifactId>
-          <version>3.0.2</version>
+          <version>3.1.0</version>
         </plugin>
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
-          <version>2.20.1</version>
+          <version>2.22.1</version>
         </plugin>
         <plugin>
           <artifactId>maven-war-plugin</artifactId>
@@ -142,7 +127,7 @@
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>versions-maven-plugin</artifactId>
-          <version>2.5</version>
+          <version>2.7</version>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -164,10 +149,12 @@
 
     <!-- maven-release-plugin properties; see http://maven.apache.org/maven-release/maven-release-plugin/ -->
     <goals>deploy,site-deploy</goals>
+    <scmCommentPrefix>[maven-release-plugin] [skip ci]</scmCommentPrefix>
     <tagNameFormat>v@{project.version}</tagNameFormat>
 
     <!-- maven-site-plugin properties -->
     <maven.site.deploy.skip>true</maven.site.deploy.skip>
+    <relativizeDecorationLinks>false</relativizeDecorationLinks>
 
     <!-- maven-surefire-plugin properties -->
     <surefire.useFile>false</surefire.useFile>
