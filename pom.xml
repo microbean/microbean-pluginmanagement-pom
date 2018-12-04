@@ -97,6 +97,10 @@
           <version>2.22.1</version>
         </plugin>
         <plugin>
+          <artifactId>maven-toolchains-plugin</artifactId>
+          <version>1.1</version>
+        </plugin>
+        <plugin>
           <artifactId>maven-war-plugin</artifactId>
           <version>3.2.2</version>
         </plugin>
@@ -125,12 +129,31 @@
           </executions>
         </plugin>
         <plugin>
+          <groupId>com.github.spotbugs</groupId>
+          <artifactId>spotbugs-maven-plugin</artifactId>
+          <version>3.1.7</version>
+        </plugin>
+        <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>versions-maven-plugin</artifactId>
           <version>2.7</version>
         </plugin>
       </plugins>
     </pluginManagement>
+    
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+      
+      <resource>
+        <targetPath>META-INF</targetPath>
+        <directory />
+        <includes>
+          <include>LICENSE</include>
+        </includes>
+      </resource>
+    </resources>
   </build>
   
   <properties>
@@ -145,6 +168,7 @@
     <!-- maven-javadoc-plugin properties -->
     <bottom><![CDATA[Copyright &copy; ${project.inceptionYear}&ndash;{currentYear}, <a href="${project.organization.url}" target="_parent">${project.organization.name}</a>. All rights reserved.]]></bottom>
     <detectLinks>false</detectLinks>
+    <doctitle>&lt;a href="${project.url}" target="_parent"&gt;&lt;span style="font-family:Lobster, cursive;"&gt;µb&lt;/span&gt; ${project.artifactId}&lt;/a&gt; ${project.version} &lt;a href="https://travis-ci.org/microbean/${project.artifactId}" target="_parent"&gt;&lt;img src="https://travis-ci.org/microbean/${project.artifactId}.svg?branch=master"&gt;&lt;/a&gt;</doctitle>
     <sourcetab>2</sourcetab>
 
     <!-- maven-release-plugin properties; see http://maven.apache.org/maven-release/maven-release-plugin/ -->
@@ -163,9 +187,34 @@
     <!-- site-github-plugin properties -->
     <github.global.server>github</github.global.server>
 
+    <!-- spotbugs-maven-plugin properties; see https://spotbugs.github.io/spotbugs-maven-plugin/spotbugs-mojo.html -->
+    <spotbugs.excludeFilterFile>src/spotbugs/exclude.xml</spotbugs.excludeFilterFile>
+    
   </properties>
 
   <profiles>
+    <profile>
+      <id>spotbugs</id>
+      <activation>
+        <file>
+          <exists>${spotbugs.excludeFilterFile}</exists>
+        </file>
+      </activation>
+      <properties>
+        <!-- spotbugs-maven-plugin properties; see https://spotbugs.github.io/spotbugs-maven-plugin/spotbugs-mojo.html -->
+        <spotbugs.effort>Max</spotbugs.effort>
+        <spotbugs.threshold>Medium</spotbugs.threshold>
+      </properties>
+      <reporting>
+        <plugins>
+          <plugin>
+            <groupId>com.github.spotbugs</groupId>
+            <artifactId>spotbugs-maven-plugin</artifactId>
+          </plugin>
+        </plugins>
+      </reporting>
+    </profile>
+    
     <profile>
       <id>toolchain</id>
       <activation>
@@ -174,14 +223,6 @@
         </file>
       </activation>
       <build>
-        <pluginManagement>
-          <plugins>
-            <plugin>
-              <artifactId>maven-toolchains-plugin</artifactId>
-              <version>1.1</version>
-            </plugin>
-          </plugins>
-        </pluginManagement>
         <plugins>
           <plugin>
             <artifactId>maven-toolchains-plugin</artifactId>
