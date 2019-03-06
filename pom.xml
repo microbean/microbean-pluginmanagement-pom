@@ -169,7 +169,7 @@
     <!-- maven-javadoc-plugin properties -->
     <bottom><![CDATA[Copyright &copy; ${project.inceptionYear}&ndash;{currentYear}, <a href="${project.organization.url}" target="_parent">${project.organization.name}</a>. All rights reserved.]]></bottom>
     <detectLinks>false</detectLinks>
-    <doctitle>&lt;a href="${project.url}" target="_parent"&gt;&lt;span style="font-family:Lobster, cursive;"&gt;µb&lt;/span&gt; ${project.artifactId}&lt;/a&gt; ${project.version} &lt;a href="https://travis-ci.org/microbean/${project.artifactId}" target="_parent"&gt;&lt;img src="https://travis-ci.org/microbean/${project.artifactId}.svg?branch=master"&gt;&lt;/a&gt;</doctitle>
+    <doctitle>&lt;a href="${project.url}" target="_parent"&gt;&lt;span style="font-family:Lobster, cursive;"&gt;µb&lt;/span&gt; ${project.artifactId}&lt;/a&gt; ${project.version} &lt;a href="${ciUrl}" target="_parent"&gt;&lt;img src="${ciBadge}"&gt;&lt;/a&gt;</doctitle>
     <sourcetab>2</sourcetab>
 
     <!-- maven-release-plugin properties; see http://maven.apache.org/maven-release/maven-release-plugin/ -->
@@ -190,6 +190,10 @@
 
     <!-- spotbugs-maven-plugin properties; see https://spotbugs.github.io/spotbugs-maven-plugin/spotbugs-mojo.html -->
     <spotbugs.excludeFilterFile>src/spotbugs/exclude.xml</spotbugs.excludeFilterFile>
+
+    <!-- CI/CD-related properties -->
+    <ciUrl>https://travis-ci.com/microbean/${project.artifactId}</ciUrl>
+    <ciBadge>${ciUrl}.svg?branch=master</ciBadge>
     
   </properties>
 
