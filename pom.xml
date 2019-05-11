@@ -10,13 +10,13 @@
   <parent>
     <groupId>org.microbean</groupId>
     <artifactId>microbean-parent-pom</artifactId>
-    <version>9</version>
-    <relativePath />
+    <version>10</version>
+    <relativePath/>
   </parent>
 
   <name>microBean Plugin Management POM</name>
   <description>${project.name}</description>
-  <inceptionYear>2017</inceptionYear>
+  <inceptionYear>2019</inceptionYear>
   <url>https://github.com/microbean/${project.artifactId}/</url>
 
   <scm>
@@ -50,11 +50,11 @@
         </plugin>
         <plugin>
           <artifactId>maven-assembly-plugin</artifactId>
-          <version>3.1.0</version>
+          <version>3.1.1</version>
         </plugin>
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.8.0</version>
+          <version>3.8.1</version>
           <configuration>
             <compilerArgs>
               <arg>-Xlint:all</arg>
@@ -67,23 +67,12 @@
           <version>3.1.1</version>
         </plugin>
         <plugin>
-          <artifactId>maven-ear-plugin</artifactId>
-          <version>3.0.1</version>
-          <configuration>
-            <version>8</version>
-          </configuration>
-        </plugin>
-        <plugin>
-          <artifactId>maven-ejb-plugin</artifactId>
-          <version>3.0.1</version>
-        </plugin>
-        <plugin>
           <artifactId>maven-enforcer-plugin</artifactId>
           <version>3.0.0-M2</version>
         </plugin>
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
-          <version>3.1.1</version>
+          <version>3.1.2</version>
         </plugin>
         <plugin>
           <artifactId>maven-plugin-plugin</artifactId>
@@ -95,19 +84,15 @@
         </plugin>
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
-          <version>2.22.1</version>
+          <version>2.22.2</version>
         </plugin>
         <plugin>
           <artifactId>maven-toolchains-plugin</artifactId>
           <version>1.1</version>
         </plugin>
         <plugin>
-          <artifactId>maven-war-plugin</artifactId>
-          <version>3.2.2</version>
-        </plugin>
-        <plugin>
           <groupId>com.github.github</groupId>
-          <artifactId>site-maven-plugin</artifactId>          
+          <artifactId>site-maven-plugin</artifactId>
           <version>0.12</version>
           <dependencies>
             <dependency>
@@ -141,12 +126,12 @@
         </plugin>
       </plugins>
     </pluginManagement>
-    
+
     <resources>
       <resource>
         <directory>src/main/resources</directory>
       </resource>
-      
+
       <resource>
         <targetPath>META-INF</targetPath>
         <directory>${project.basedir}</directory>
@@ -156,16 +141,13 @@
       </resource>
     </resources>
   </build>
-  
-  <properties>
 
-    <!-- maven-ejb-plugin properties -->
-    <ejb.ejbVersion>3.1</ejb.ejbVersion>
+  <properties>
 
     <!-- maven-compiler-plugin properties -->
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    
+
     <!-- maven-javadoc-plugin properties -->
     <bottom><![CDATA[Copyright &copy; ${project.inceptionYear}&ndash;{currentYear}, <a href="${project.organization.url}" target="_parent">${project.organization.name}</a>. All rights reserved.]]></bottom>
     <detectLinks>false</detectLinks>
@@ -194,10 +176,10 @@
     <!-- CI/CD-related properties -->
     <ciUrl>https://travis-ci.com/microbean/${project.artifactId}</ciUrl>
     <ciBadge>${ciUrl}.svg?branch=master</ciBadge>
-    
+
   </properties>
 
-  <profiles>    
+  <profiles>
     <profile>
       <id>spotbugs</id>
       <activation>
@@ -219,7 +201,7 @@
         </plugins>
       </reporting>
     </profile>
-    
+
     <profile>
       <id>toolchain</id>
       <activation>
