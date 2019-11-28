@@ -10,11 +10,11 @@
   <parent>
     <groupId>org.microbean</groupId>
     <artifactId>microbean-parent-pom</artifactId>
-    <version>10</version>
+    <version>11</version>
     <relativePath />
   </parent>
 
-  <name>microBean Plugin Management POM</name>
+  <name>microBean™ Plugin Management POM</name>
   <description>${project.name}</description>
   <inceptionYear>2019</inceptionYear>
   <url>https://github.com/microbean/${project.artifactId}/</url>
@@ -33,11 +33,31 @@
 
   <dependencyManagement>
     <dependencies>
+
       <dependency>
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
         <version>4.12</version>
       </dependency>
+
+      <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-api</artifactId>
+        <version>5.5.2</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-engine</artifactId>
+        <version>5.5.2</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.junit.vintage</groupId>
+        <artifactId>junit-vintage-engine</artifactId>
+        <version>5.5.2</version>
+      </dependency>
+
     </dependencies>
   </dependencyManagement>
 
@@ -50,7 +70,11 @@
         </plugin>
         <plugin>
           <artifactId>maven-assembly-plugin</artifactId>
-          <version>3.1.1</version>
+          <version>3.2.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-checkstyle-plugin</artifactId>
+          <version>3.1.0</version>
         </plugin>
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
@@ -68,11 +92,21 @@
         </plugin>
         <plugin>
           <artifactId>maven-enforcer-plugin</artifactId>
-          <version>3.0.0-M2</version>
+          <version>3.0.0-M3</version>
         </plugin>
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
-          <version>3.1.2</version>
+          <version>3.2.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <dependencies>
+            <dependency>
+              <groupId>org.slf4j</groupId>
+              <artifactId>slf4j-log4j12</artifactId>
+              <version>1.7.29</version>
+            </dependency>
+          </dependencies>
         </plugin>
         <plugin>
           <artifactId>maven-plugin-plugin</artifactId>
@@ -83,12 +117,28 @@
           <version>3.1.0</version>
         </plugin>
         <plugin>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.8.2</version>
+          <dependencies>
+            <dependency>
+              <groupId>org.apache.velocity</groupId>
+              <artifactId>velocity</artifactId>
+              <version>1.7</version>
+            </dependency>
+            <dependency>
+              <groupId>lt.velykis.maven.skins</groupId>
+              <artifactId>reflow-velocity-tools</artifactId>
+              <version>1.1.1</version>
+            </dependency>
+          </dependencies>
+        </plugin>
+        <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
           <version>2.22.2</version>
         </plugin>
         <plugin>
           <artifactId>maven-toolchains-plugin</artifactId>
-          <version>1.1</version>
+          <version>3.0.0</version>
         </plugin>
         <plugin>
           <groupId>com.github.github</groupId>
@@ -102,7 +152,7 @@
             </dependency>
           </dependencies>
           <configuration>
-            <message>Building site for ${project.artifactId} ${project.version}</message>
+            <message>Building Github Pages site for ${project.artifactId} ${project.version}</message>
           </configuration>
           <executions>
             <execution>
@@ -117,7 +167,7 @@
         <plugin>
           <groupId>com.github.spotbugs</groupId>
           <artifactId>spotbugs-maven-plugin</artifactId>
-          <version>3.1.11</version>
+          <version>3.1.12.2</version>
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
@@ -222,6 +272,7 @@
                   <toolchains>
                     <jdk>
                       <version>${jdkToolchainVersion}</version>
+                      <vendor>${jdkToolchainVendor}</vendor>
                     </jdk>
                   </toolchains>
                 </configuration>
@@ -232,8 +283,30 @@
       </build>
       <properties>
         <!-- Properties related to maven-toolchains-plugin -->
+        <jdkToolchainVendor>Oracle</jdkToolchainVendor>
         <jdkToolchainVersion>${maven.compiler.target}</jdkToolchainVersion>
       </properties>
+    </profile>
+
+    <profile>
+      <id>test-logging</id>
+      <activation>
+        <file>
+          <exists>src/test/java/logging.properties</exists>
+        </file>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+              <systemPropertyVariables>
+                <java.util.logging.config.file>${project.basedir}/src/test/logging.properties</java.util.logging.config.file>
+              </systemPropertyVariables>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
     </profile>
   </profiles>
 
