@@ -297,7 +297,7 @@
       <id>test-logging</id>
       <activation>
         <file>
-          <exists>src/test/java/logging.properties</exists>
+          <exists>src/test/logging.properties</exists>
         </file>
       </activation>
       <build>
